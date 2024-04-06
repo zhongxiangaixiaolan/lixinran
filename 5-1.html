@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>友谊聊吧</title>
+    <link rel="stylesheet" href="5-1.css" type="text/css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h3>友谊聊吧</h3>
+        <div class="container">
+            <!-- 女生组件 -->
+            <div class="girl">
+                <girl :messages="messages"></girl>
+            </div>
+            <!-- 男生组件 -->
+            <div class="boy">
+                <boy :messages="messages"></boy>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="5-1.js">
+
+    </script>
+
+</body>
+
+</html>

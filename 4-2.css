@@ -1,0 +1,213 @@
+h3 {
+    text-align: center;
+    text-shadow: 2px 2px 3px #2C3E50;
+    font-size: 30px;
+    margin: 10px 0;
+    color: #1A237E;
+}
+
+/* 增加容器宽度，并添加渐变背景 */
+.container {
+    width: 600px;
+    /* 增加宽度 */
+    margin: 50px auto;
+    padding: 20px 20px;
+    background: linear-gradient(to right, #6DD5FA, #FF758C);
+    /* 添加渐变背景 */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+/* 添加序号显示以及鼠标悬浮动画效果 */
+ol {
+    counter-reset: list-counter;
+    /* 初始化计数器 */
+    padding-left: 0;
+    /* 移除默认的内填充 */
+}
+
+li {
+    counter-increment: list-counter;
+    /* 增加计数值 */
+    list-style: none;
+    padding: 5px 0;
+    border-bottom: 1px solid #E0E0E0;
+    margin: 8px 0;
+    overflow: hidden;
+    position: relative;
+    /* 为序号定位准备 */
+    transition: background-color 0.3s ease;
+    /* 添加背景颜色过渡动画 */
+}
+
+li::before {
+    content: counter(list-counter) ". ";
+    /* 使用计数器值 */
+    position: absolute;
+    left: -50px;
+    /* 将序号放在列表项外 */
+}
+
+/* 鼠标悬停动画效果 */
+li:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    /* 悬停时改变背景 */
+    cursor: pointer;
+    /* 改变鼠标样式 */
+}
+
+
+.cancelClass {
+    font-weight: bold;
+    width: 24px;
+    color: #FF5252;
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+    margin-left: 15px;
+}
+
+.cancelClass:hover {
+    color: #FF1744;
+}
+
+.doneClass {
+    text-decoration: line-through;
+    color: #9E9E9E;
+}
+
+.not {
+    text-decoration: none;
+}
+
+input[type="text"] {
+    border-radius: 5px;
+    border: 1px solid #4CAF50;
+    /* 使边框颜色更明显 */
+    width: calc(100% - 100px);
+    /* 减去按钮宽度，以适配容器 */
+    padding: 5px;
+    /* 增加内填充以更美观 */
+    margin-right: 10px;
+    /* 和按钮间增加空隙 */
+}
+
+fieldset {
+    border-radius: 10px;
+    border: 1px solid #BDBDBD;
+    padding: 20px;
+    /* 调整填充 */
+}
+
+.btn1,
+.btn2 {
+    border: 1px solid #1A237E;
+    /* 统一按钮边框颜色 */
+    padding: 5px 15px;
+    /* 调整内填充以适应内容 */
+}
+
+.btn1:hover,
+.btn2:hover {
+    background: #303F9F;
+    /* 悬停时背景颜色 */
+    color: white;
+    /* 悬停时字体颜色 */
+}
+
+[type="checkbox"] {
+    vertical-align: middle;
+    /* 与文本垂直对齐 */
+    margin-right: 5px;
+    /* 与文本保留一些空间 */
+}
+
+.itemClass {
+    display: inline-block;
+    /* 若要与复选框对齐需要改为内联块 */
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.inlineDiv {
+    display: inline-block;
+    margin: 10px 5px;
+    /* 调整间距 */
+}
+
+@media screen and (max-width: 768px) {
+    /* 在屏幕宽度小于768px时，应用以下样式 */
+
+    .container {
+        width: 100%;
+        /* 屏幕宽度充满容器 */
+        padding: 20px 10px;
+        /* 减少一些内边距 */
+        margin: 20px auto;
+        /* 顶部和底部边距调整 */
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+        /* 减少阴影 */
+    }
+
+    h3 {
+        font-size: 24px;
+        /* 减小标题字体大小 */
+        margin: 10px 0;
+        /* 调整标题的上下边距 */
+    }
+
+    input[type="text"] {
+        width: calc(100% - 50px);
+        /* 减少宽度，确保输入框和按钮在一行显示 */
+        margin-bottom: 10px;
+        /* 增加与按钮的垂直间距 */
+    }
+
+    .btn1,
+    .btn2 {
+        padding: 10px;
+        /* 增加按钮的填充，便于点击 */
+    }
+
+    ol {
+        padding-left: 20px;
+        /* 有序列表左侧的填充，以留出空间用于显示列表项序号 */
+    }
+
+    li::before {
+        content: none;
+        /* 移动设备上不显示序号 */
+    }
+
+    .cancelClass,
+    .btn1,
+    .btn2 {
+        font-size: 16px;
+        /* 调整字号，使按钮和删除图标更易于点击 */
+    }
+
+    .cancelClass {
+        margin: 0;
+        /* 移除取消按钮的外边距 */
+        position: absolute;
+        /* 绝对定位 */
+        right: 10px;
+        /* 放置在列表项的右侧 */
+        top: 50%;
+        /* 垂直居中 */
+        transform: translateY(-50%);
+        /* 微调上下位置 */
+    }
+
+    li {
+        padding-right: 40px;
+        /* 为cancelClass绝对定位留出空间 */
+    }
+
+    .inlineDiv {
+        display: block;
+        /* 设置为块状元素，以便换行显示 */
+        margin: 10px auto;
+        /* 调整间距 */
+    }
+}

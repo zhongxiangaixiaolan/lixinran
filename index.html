@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我爱你，李欣然！！！</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #FFD1DC;
+        }
+
+        .cherry-tree {
+            width: 80%;
+            /* 在小屏幕上你可能希望图片更小 */
+            max-width: 300px;
+            /* 限定最大宽度为300px */
+            border: 5px solid #FF88CB;
+            margin-bottom: 20px;
+        }
+
+        #timeline-container {
+            width: 90%;
+            max-width: 500px;
+            /* 限定最大宽度避免在大屏幕上看起来过宽 */
+            overflow: hidden;
+            border: 3px solid #FF88CB;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(255, 136, 203, 0.5);
+            align-items: center;
+        }
+
+        .day {
+            width: 100%;
+            /* 确定 .day 与 #timeline-container 同宽 */
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .day-content {
+            width: 100%;
+            /* 与 .day 同宽 */
+            padding: 20px;
+            text-align: center;
+            font-size: 2em;
+            /* 使用相对单位，易于响应式调整 */
+            color: black;
+        }
+
+        .day-content span {
+            font-size: 1.2em;
+            /* 相对于.day-content的字体大小 */
+            color: #FF69B4;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 1em;
+            /* 使用相对单位 */
+            color: #FFF;
+            background-color: #FF69B4;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        button:hover {
+            background-color: #FF88CB;
+        }
+
+        /* 以下为媒体查询，根据屏幕尺寸来调整一些样式 */
+        @media (max-width: 768px) {
+            .cherry-tree {
+                width: 90%;
+                /* 在更小屏幕上使图片更满 */
+                border: 3px solid #FF88CB;
+            }
+
+            #timeline-container {
+                width: 90%;
+                border: 3px solid #FF88CB;
+                /* 边框稍细 */
+            }
+
+            .day-content {
+                font-size: 1.5em;
+                /* 小屏幕上减少字体大小 */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="../images/cherry-tree.png" alt="Cherry Tree" class="cherry-tree">
+    </div>
+    <div id="timeline-container">
+        <div id="days" class="day">
+            <!-- day-content的文本现在通过JavaScript控制 -->
+            <div class="day-content" id="typed-text"></div>
+        </div>
+    </div>
+    <button id="next" onclick="window.location.href='cherry.html'">我要欣赏</button>
+
+    <script>let currentDay = 0;
+        const typingText = document.getElementById('typed-text');
+
+        // 分割文本以独立处理"樱花树"部分
+        const beforeText = "第一天，我想带你看的是";
+        const highlightText = "樱花树";
+
+        function typeWriter(text, i, fnCallback) {
+            if (i < text.length) {
+                typingText.innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>';
+
+                setTimeout(function () {
+                    typeWriter(text, i + 1, fnCallback)
+                }, 150); // 速度减半，改为150毫秒
+            } else if (typeof fnCallback == 'function') {
+                setTimeout(fnCallback, 1000); // 文本显示完成后稍等一秒
+            }
+        }
+
+        function StartTextAnimation() {
+            typeWriter(beforeText, 0, function () {
+                typingText.innerHTML += '<span class="highlight">' + highlightText + '</span>';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function (event) {
+            StartTextAnimation();
+        });</script>
+</body>
+
+</html>

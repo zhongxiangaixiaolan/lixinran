@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我爱你，李欣然！！！</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            /* 初始化背景设定 */
+            background: url('resource/green.png') no-repeat center center fixed;
+            background-size: cover;
+            transition: background-image 1s ease-in-out;
+            /* 背景切换时的渐变效果 */
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            animation: fadeIn 0.5s;
+        }
+
+        .modal-content {
+            background-color: #7b4397;
+            /* Fallback for older browsers */
+            background: -webkit-linear-gradient(to right, #dc2430, #7b4397);
+            background: linear-gradient(to right, #dc2430, #7b4397);
+            color: white;
+            margin: auto;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            border: 1px solid #ccc;
+            animation: scaleIn 0.5s;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .modal button {
+            padding: 12px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            outline: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .modal button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .yes-button {
+            background-color: #4CAF50;
+        }
+
+        .no-button {
+            background-color: #f44336;
+        }
+
+        /* 歌词展示的样式定义 */
+        .lyrics-style {
+            position: absolute;
+            /* 绝对定位，方便居中 */
+            top: 50%;
+            /* 垂直居中 */
+            left: 50%;
+            /* 水平居中 */
+            transform: translate(-50%, -50%);
+            /* 精确居中 */
+            text-align: center;
+            /* 文本居中 */
+            font-size: 3rem;
+            /* 字体放大到3rem */
+            color: #0ff;
+            /* 使用未来感的青色字体 */
+            border: 1px solid #0ff;
+            /* 青色边框 */
+            border-radius: 0;
+            /* 直角边框 */
+            padding: 20px;
+            /* 内边距 */
+            background: rgba(0, 0, 0, 0.5);
+            /* 半透明黑色背景 */
+            box-shadow: 0 0 10px #0ff;
+            /* 发光效果 */
+        }
+
+        /* 使用动画实现歌词的逐渐出现效果 */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        #lyrics-text {
+            /* 给歌词文本添加逐渐出现的动画 */
+            animation: fadeIn 3s ease;
+        }
+
+        /* 隐藏类，当需要显示时会被移除 */
+        .hidden {
+            display: none;
+        }
+
+        /* 文字发光的动画 */
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 10px #0ff;
+            }
+
+            to {
+                text-shadow: 0 0 20px #0ff;
+            }
+        }
+
+        #lyrics-text {
+            /* 文字的发光动画 */
+            animation: textGlow 1s alternate infinite;
+        }
+
+        /* 响应式媒体查询样式 */
+        @media screen and (max-width: 768px) {
+            .modal-content {
+                padding: 20px;
+                /* 在小屏幕上减少内边距以节省空间 */
+                width: 95%;
+                /* 增加宽度占比 */
+            }
+
+            .modal h2 {
+                font-size: 24px;
+                /* 减小字体大小 */
+            }
+
+            .modal button {
+                padding: 10px 20px;
+                /* 调整按钮大小 */
+                font-size: 16px;
+                /* 减小按钮字体大小 */
+            }
+
+            .lyrics-style {
+                font-size: 2rem;
+                /* 减小歌词字体大小 */
+                padding: 15px;
+                /* 减少内边距 */
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .modal-content {
+                border-radius: 15px;
+                /* 减小边框弧度 */
+            }
+
+            .modal h2 {
+                font-size: 20px;
+                /* 进一步减小字体大小 */
+            }
+
+            .lyrics-style {
+                font-size: 1.5rem;
+                /* 进一步减小歌词字体大小 */
+                padding: 10px;
+                /* 进一步减少内边距 */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="typing-container">
+        <p id="typed-text"></p>
+    </div>
+    <audio id="background-music" src="resource/2.mp3" autoplay loop></audio>
+
+    <!-- 模拟弹窗 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title">是否愿意听我为你唱一首歌</h2>
+            <button id="yes-button" class="yes-button">愿意</button>
+            <button id="no-button" class="no-button">不愿意</button>
+        </div>
+    </div>
+
+    <!-- 歌词容器，增加了科技感的花边装饰样式 -->
+    <div id="lyrics-container" class="hidden lyrics-style">
+        <p id="lyrics-text"></p>
+    </div>
+    <script>
+        // 背景图像数组
+        const backgroundImages = [
+            'resource/green.png',
+            'resource/green1.png',
+            'resource/green2.png',
+            'resource/green3.png',
+            'resource/green4.png',
+            'resource/green5.png',
+            'resource/green6.png',
+            'resource/green7.png',
+            'resource/green8.png',
+            'resource/green9.png',
+            'resource/green10.png',
+            'resource/green11.png',
+            'resource/green12.png',
+            'resource/green13.png',
+            'resource/green14.png',
+            'resource/green15.png',
+            'resource/green16.png'
+        ];
+        // 图片轮换间隔（毫秒）
+        const changeInterval = 10000; // 5秒更换一次
+
+        function changeBackgroundImage() {
+            const bodyElement = document.querySelector('body');
+            let currentImageIndex = 0;
+
+            setInterval(() => {
+                bodyElement.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
+                currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+            }, changeInterval);
+        }
+
+        // JavaScript代码段
+        const lyricsData = [
+            { time: 0, text: "亲爱的李欣然，时光轻推漫漫" },
+            { time: 4, text: "百日情深，你已占我心间" },
+            { time: 9, text: "如画卷中那笔墨温柔" },
+            { time: 12, text: "夫妻之缘虽相识尚浅" },
+            { time: 15, text: "心已紧牵" },
+            { time: 18, text: "天转百日轮回，与你心灵相牵" },
+            { time: 23, text: "每逢夜色降临，思念如泉湧涌" },
+            { time: 28, text: "情如晨露，秘密地在心间播种" },
+            { time: 32, text: "在你我之间萌芽，静待花开遍野" },
+            { time: 39, text: "在记忆湖畔，爱光闪烁波间" },
+            { time: 42, text: "月光如洒，咱俩身影交绵" },
+            { time: 44, text: "无须更多言语，眼神已道出心传" },
+            { time: 49, text: "百天约定" },
+            { time: 50, text: "紧握着深情，一世相伴，一世相伴" },
+            { time: 54, text: "星空下愿望" },
+            { time: 56, text: "李欣然" },
+            { time: 57, text: "我心你全占" },
+            { time: 59, text: "每次微笑消散,我所有忧闷" },
+            { time: 64, text: "每个清晨到夜晚，你的声音陪伴" },
+            { time: 69, text: "如诗如画，永生欣赏" },
+            { time: 72, text: "让月光证明，心与心交响" },
+            { time: 82, text: "百日情长，清新如雨后露光" },
+            { time: 85, text: "你我之间的笑谈，轻如风过柳梢" },
+            { time: 90, text: "百天的缘分" },
+            { time: 92, text: "故事渐铺，长短篇章" },
+            { time: 99, text: "细数情话，如古琴曲旋绕" },
+            { time: 103, text: "李欣然，听见心中那翩跹情报" },
+            { time: 107, text: "尽管世界喧嚣" },
+            { time: 109, text: "不及此刻宁静召" },
+            { time: 111, text: "每一次相见，似是命运安排的美好" },
+            { time: 118, text: "昼夜与你相随，共赴未来旅途" },
+            { time: 123, text: "每个瞬间都觉得，有你真好" },
+            { time: 128, text: "从甜言蜜语到默契的眼神" },
+            { time: 132, text: "我们的爱，就像星河永恒" },
+            { time: 138, text: "时光不老，我们不散，是你给的承诺" },
+            { time: 143, text: "在这光阴的故事里，颜料刚柔并济" },
+            { time: 149, text: "你的每个呢喃" },
+            { time: 151, text: "我的每次微笑" },
+            { time: 153, text: "共同绘成一幅，青春的恋歌笑" },
+            { time: 158, text: "缤纷的花开只为你，李欣然" },
+            { time: 162, text: "在我生命之森的每片叶间" },
+            { time: 167, text: "你那柔和的光辉，照亮我所有晨与暮" },
+            { time: 172, text: "有了你" },
+            { time: 174, text: "寻常日子，都变得神秘" },
+            { time: 179, text: "寻常日子，都变得神秘" },
+
+
+        ];
+        let lyricsIndex = 0;
+
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const yesButton = document.getElementById('yes-button');
+        const noButton = document.getElementById('no-button');
+        const lyricsContainer = document.getElementById('lyrics-container');
+        const lyricsText = document.getElementById('lyrics-text');
+        const backgroundMusic = document.getElementById('background-music');
+
+        // 以下为原有的函数和事件处理器代码：
+        function showModal() {
+            modal.style.display = 'flex';
+        }
+
+        function hideModal() {
+            modal.style.display = 'none';
+        }
+
+        function playMusic() {
+            backgroundMusic.play().catch(error => console.error("音乐播放失败:", error));
+            lyricsContainer.classList.remove('hidden');
+            displayLyrics();
+        }
+
+        function displayLyrics() {
+            const currentLyric = lyricsData[lyricsIndex];
+            if (currentLyric && backgroundMusic.currentTime >= currentLyric.time) {
+                lyricsText.textContent = currentLyric.text;
+                lyricsIndex++;
+            }
+            if (lyricsIndex < lyricsData.length) { requestAnimationFrame(displayLyrics); } else if
+                (lyricsIndex === lyricsData.length) { lyricsContainer.classList.add('hidden'); }
+        } yesButton.onclick = function () {
+            hideModal(); playMusic();
+        }; noButton.onclick = function () {
+            modalTitle.textContent = "不可以不愿意";
+            yesButton.style.display = 'none'; noButton.style.display = 'none'; setTimeout(() => {
+                playMusic();
+                yesButton.style.display = 'inline-block';
+                noButton.style.display = 'inline-block';
+                modalTitle.textContent = "是否愿意听我为你唱一首歌";
+                hideModal();
+            }, 2000);
+        };
+
+        // 将背景图像改变的函数和展示模态窗口的调用放置在window.onload中
+        window.onload = function () {
+            showModal();
+            changeBackgroundImage();
+        };
+    </script>
+</body>
+
+</html>

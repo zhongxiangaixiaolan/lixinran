@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         createSakuraLoop(); // 创建樱花的循环，假设已经在下面定义了此函数
 
         // 播放音乐
-        var audio = new Audio('resource/1.mp3');
+        var audio = new Audio('1.mp3');
         audio.play();
 
         // 关闭模拟框
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         sakura.style.animationDuration = `${Math.random() * 3 + 3}s`; // 飘落动画持续时间
 
-        sakura.innerHTML = `<img src="resource/cherry-blossom.png" alt="Sakura" style="width: 100%;">`; // 确保图片为10px
+        sakura.innerHTML = `<img src="cherry-blossom.png" alt="Sakura" style="width: 100%;">`; // 确保图片为10px
 
         document.body.appendChild(sakura);
 
